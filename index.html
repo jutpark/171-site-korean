@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Image with Instructions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #print-container {
+            text-align: center;
+            margin: 20px;
+        }
+
+        #instructions {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        #print-button {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="print-container">
+    <img id="print-image" src="bidoof-pokemon.png" alt="Printable Image">
+    <br>
+    <textarea id="instructions" placeholder="이 사진을 인쇄하고 게임을 즐겨보세요. 필요에 따라 게임 조각을 자르십시오"></textarea>
+    <br>
+    <button onclick="printPage()">Print</button>
+</div>
+
+<script>
+    function printPage() {
+        var printContainer = document.getElementById("print-container");
+        var instructions = document.getElementById("instructions").value;
+
+        // Create a new window for printing
+        var printWindow = window.open('', '_blank');
+        
+        // Inject HTML content into the new window
+        printWindow.document.write('<html><head><title>Print</title></head><body>');
+        printWindow.document.write('<img src="' + document.getElementById("print-image").src + '" alt="Printable Image">');
+        printWindow.document.write('<p>' + instructions + '</p>');
+        printWindow.document.write('</body></html>');
+        
+        // Close the document and initiate the print
+        printWindow.document.close();
+        printWindow.print();
+    }
+</script>
+
+</body>
+</html>
